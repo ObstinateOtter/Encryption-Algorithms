@@ -32,7 +32,7 @@ def repeat():
 
 def enigma_encrypt():
     en_msg = input("Enter string: ")
-    en_lst = list(en_msg.lower())
+    en_lst = list(en_msg)
     ans = []
     for i in range(len(en_lst)):
         key = random.randint(1,1_000_000_000) #selects a random number from 1 to 1B
