@@ -1,5 +1,5 @@
-import random
-#yes lmao this program uses random module
+import random   #yes lmao this program uses random module
+import pyperclip as pc
 
 def start():
     print("\n \nEnter 1 to encrypt your message. \nEnter 2 to decrypt your message.")
@@ -33,7 +33,7 @@ def repeat():
 def enigma_encrypt():
     en_msg = input("Enter string: ")
     en_lst = list(en_msg.lower())
-    print("Encrypted message is:",end="")
+    ans = []
     for i in range(len(en_lst)):
         key = random.randint(1,1_000_000_000) #selects a random number from 1 to 1B
         enc1 = ord(en_lst[i])+key #finds ascii value of letter and adds key to it
@@ -41,7 +41,12 @@ def enigma_encrypt():
         enc3 = enc2 - key
         h_k = (str(hex(key))).replace('0x','') #removes the '0x' that precedes every hex number  
         h_e = (str(hex(enc3))).replace('0x','')
-        print(str(h_k),str(h_e),sep='​',end= "​")  #they are seperated by the an invisible character 'U+200B'
+        ans.append(str(h_k))
+        ans.append(str(h_e))
+    fin = '​'.join(ans)                 #seperated by 'U+200B'
+    print("Encrypted message is:",fin,)
+    pc.copy(fin)
+    print('\n Copied to Clipboard! \n')
     repeat()
 
 
