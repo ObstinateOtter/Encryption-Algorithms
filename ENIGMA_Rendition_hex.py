@@ -1,32 +1,22 @@
 import random   #yes lmao this program uses random module
 import pyperclip as pc
 
-def start():
-    print("\n \nEnter 1 to encrypt your message. \nEnter 2 to decrypt your message.")
-    ans = input("Enter choice: ")
-    if ans == '1':
-        enigma_encrypt()
-    elif ans == '2':
-        enigma_decrypt()
-    else:
-        print("Invalid Input!!!")
-        start()
 
 
-def repeat():
-    ans = input("\n \nWould you like to encrypt/decrypt again?[yes/no]: ")
-    if ans.lower() == "yes":
-        start()
-    elif ans.lower() == "no":
-        exit()
-    else:
-        print("Invalid Input!!!")
-        repeat()
+
+
+
+
 
 
 def enigma_encrypt():
-    encrypt_range = 100
+    encrypt_range = 10
+
     en_msg = input("Enter string: ")
+    sep = input('What is your seperator[leave blank to use an invisible seperator]: ')
+    if sep == '':
+        sep = '​'   #seperated by 'U+200B'
+    
     en_lst = list(en_msg)
     ans = []
     for i in range(len(en_lst)):
@@ -38,26 +28,37 @@ def enigma_encrypt():
         h_e = (str(hex(enc3))).replace('0x','')
         ans.append(str(h_k))
         ans.append(str(h_e))
-    fin = '​'.join(ans)                 #seperated by 'U+200B'
+    fin = sep.join(ans)
     print("Encrypted message is:",fin)
     pc.copy(fin)
     print('\n Copied to Clipboard! \n')
-    repeat()
 
 
 def enigma_decrypt():
     de_msg = input("\n \n \nEnter string: ")
-    de_lst = de_msg.split('​')  #it is split by invisible character 'U+200B'
+    sep = input('What is your seperator[leave blank to use an invisible seperator]: ')
+    if sep == '':
+        sep = '​'#it is split by invisible character 'U+200B'
+    de_lst = de_msg.split(sep)
     print("\n The Decrypted message is: ",end="")
     for i in range(1,len(de_lst),2):
-
         key = int('0x'+str(de_lst[i-1]),16)     #adds the '0x' and turns it into base-10 integer
         num = int('0x'+str(de_lst[i]),16)
         dec1 = num + key
         dec2 = dec1 // key
         dec3 = chr(dec2 - key) #finds the letter from the integer remaining
         print(dec3,end="")
-    repeat()
+    print('\n')
 
 
-start()
+while True:
+    ans = input("\n \n1.Encrypt your message. \n2.Decrypt your message.\n3.Exit\nEnter choice: ")
+    if ans == '1':
+        enigma_encrypt()
+    elif ans == '2':
+        enigma_decrypt()
+    elif ans == '3':
+        input('Exited.\n')
+        break
+    else:
+        print("Invalid Input!!!")
