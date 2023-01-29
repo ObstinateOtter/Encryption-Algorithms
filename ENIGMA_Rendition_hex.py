@@ -1,14 +1,6 @@
 import random   #yes lmao this program uses random module
 import pyperclip as pc
 
-
-
-
-
-
-
-
-
 def enigma_encrypt():
     encrypt_range = 10
 
