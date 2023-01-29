@@ -1,6 +1,7 @@
 import random   #yes lmao this program uses random module
 import pyperclip as pc
 
+
 def enigma_encrypt():
     encrypt_range = 10
 
@@ -28,7 +29,7 @@ def enigma_encrypt():
 
 def enigma_decrypt():
     de_msg = input("\n \n \nEnter string: ")
-    sep = input('What is your seperator[leave blank to use an invisible seperator]: ')
+    sep = input('What is your seperator: ')
     if sep == '':
         sep = '​'#it is split by invisible character 'U+200B'
     de_lst = de_msg.split(sep)
@@ -50,7 +51,7 @@ while True:
     elif ans == '2':
         enigma_decrypt()
     elif ans == '3':
-        input('Exited.\n')
+        print('Exited.\n')
         break
     else:
         print("Invalid Input!!!")
